@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"target": "ES5",
+		"module": "commonjs",
+		"sourceMap": true
+	},
+	"files": [
+		"src/@init.ts",
+		"src/feign-circuit-breaker.ts",
+		"src/~bootstrap.ts"		
+	]
+	
+	
+}

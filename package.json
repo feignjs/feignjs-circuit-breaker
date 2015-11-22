@@ -1,0 +1,55 @@
+{
+  "name": "feignjs-circuit-breaker",
+  "version": "0.0.5",
+  "description": "circuit-breaker integration for feingjs",
+  "main": "dist/feign-circuit-breaker.js",
+  "scripts": {
+    "test": "nodeunit tests",
+    "compile": "npm run tsc && npm run browserify && npm run uglify",
+    "tsc": "node_modules/.bin/tsc -d --out dist/feign-circuit-breaker.js --module commonjs",
+    "browserify": "node_modules/.bin/browserify dist/feign-circuit-breaker.js -o dist/feign-circuit-breaker.web.js --s feign --no-bundle-external -t browserify-shim",
+    "uglify": "node_modules/.bin/uglifyjs dist/feign-circuit-breaker.web.js -o dist/feign-circuit-breaker.web.min.js",
+    "typedoc": "node_modules/.bin/typedoc --readme none --module commonjs --out docs/ src/"
+  },
+  "browserify-shim": {
+    "args-js": "global:Args",
+    "lodash": "global:_"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feignjs/feignjs-circuit-breaker.git"
+  },
+  "keywords": [
+    "feignjs",
+    "circuit",
+    "breaker",
+    "hystrix",
+    "rest",
+    "client"
+  ],
+  "author": "Peter Mucha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/feignjs/feignjs-circuit-breaker/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "args-js": "^0.10.6",
+    "circuit-breaker-js": "0.0.1",
+    "feignjs": "0.0.5",
+    "lodash": "^3.9.3"
+  },
+  "homepage": "https://github.com/feignjs/feignjs-circuit-breaker#readme",
+  "devDependencies": {
+    "typescript": "^1.5.0-beta",
+    "browserify": "^10.2.4",
+    "browserify-shim": "^3.8.8",
+    "codecov.io": "^0.1.2",
+    "istanbul": "^0.3.15",
+    "nodeunit": "^0.9.1",
+    "typedoc": "^0.3.4",
+    "uglify-js": "^2.4.23"
+  }
+}
