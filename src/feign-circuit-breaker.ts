@@ -17,9 +17,8 @@ module feign_cb {
 		], arguments);
 		
 		var circuitBreaker = new CircuitBreaker(args.config)
-		var builder = feign.builder.call(null, args.promise)
-    
-    builder.proxyFactory(args.promise ? promiseProxyFactory : cbProxyFactory);
+		var builder = feignjs.builder.call(null, args.promise)
+    builder.proxyFactory(args.promise ? promiseProxyFactory(circuitBreaker) : cbProxyFactory(circuitBreaker));
     
 		return builder;
 	}
@@ -48,6 +47,7 @@ module feign_cb {
    * creates the factory-function which closes over the circuitBreaker
    */
   export var promiseProxyFactory = function(circuitBreaker){
+    
     return function(baseUrl: string, requestObj: feign.Wrapper): () => Promise<feign.Response> {
       return function () {
         var args = Array.prototype.slice.call(arguments);
@@ -62,7 +62,7 @@ module feign_cb {
               failed();
             });
         }
-        circuitBreaker.run(command);
+        circuitBreaker.run(command, requestObj.options["fallback"]);
         return deferred.promise;
       };
     };

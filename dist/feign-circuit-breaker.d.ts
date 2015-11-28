@@ -2,6 +2,7 @@
 declare var Args: Args.ArgsStatic;
 declare var _: _.LoDashStatic;
 declare var CircuitBreaker: any;
+declare var feignjs: any;
 declare module feign_cb {
     /**
      * creates a feign builder that wraps all
