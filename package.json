@@ -1,6 +1,6 @@
 {
   "name": "feignjs-circuit-breaker",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "circuit-breaker integration for feingjs",
   "main": "dist/feign-circuit-breaker.js",
   "scripts": {
@@ -38,7 +38,7 @@
   "dependencies": {
     "args-js": "^0.10.6",
     "circuit-breaker-js": "0.0.1",
-    "feignjs": "0.0.5",
+    "feignjs": "^0.0.6",
     "lodash": "^3.9.3"
   },
   "homepage": "https://github.com/feignjs/feignjs-circuit-breaker#readme",

@@ -1,0 +1,33 @@
+{
+  "name": "feignjs-circuit-breaker",
+  "version": "0.0.6",
+  "homepage": "https://github.com/feignjs/feignjs-circuit-breaker",
+  "authors": [
+    "Peter Mucha <ptmucha@gmail.com>"
+  ],
+  "description": "feinjs circuitbreaker integration",
+  "main": "dist/feign-circuit-breaker.web.js",
+  "moduleType": [
+    "globals"
+  ],
+  "dependencies": {    
+    "args-js": "^0.10.6",
+    "circuit-breaker-js": "0.0.1",
+    "feignjs": "^0.0.6",
+    "lodash": "^3.9.3"
+  },
+  "keywords": [
+    "feignjs",
+    "circuitbreaker",
+    "feign",
+    "rest"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
