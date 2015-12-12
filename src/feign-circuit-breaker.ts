@@ -24,7 +24,7 @@ module feign_cb {
 	}
 	
   export var cbProxyFactory =  function(circuitBreaker){
-    return function (baseUrl: string, requestObj: feign.Wrapper): () => void {
+    var fn = function (baseUrl: string, requestObj: feign.Wrapper): () => void {
       return function () {
         var args = Array.prototype.slice.call(arguments);
         var callback = args.pop();
@@ -41,6 +41,8 @@ module feign_cb {
         
       };
     };
+    fn['breaker'] = circuitBreaker;
+    return fn;
   };
   
   /**
@@ -49,7 +51,7 @@ module feign_cb {
   export var promiseProxyFactory = function(circuitBreaker){
     
     return function(baseUrl: string, requestObj: feign.Wrapper): () => Promise<feign.Response> {
-      return function () {
+      var fn = function () {
         var args = Array.prototype.slice.call(arguments);
         var deferred = Promise["defer"](); //work around typescript...
         var command = function(success, failed){
@@ -62,9 +64,22 @@ module feign_cb {
               failed();
             });
         }
-        circuitBreaker.run(command, requestObj.options["fallback"]);
+        var fallback = null; 
+        if (requestObj.options["fallback"]){
+          fallback = function(){ 
+            var result = requestObj.options["fallback"]();
+             deferred.resolve(result);
+          }
+        }
+        process.nextTick( function(){
+          circuitBreaker.run(command, fallback);
+        });
+        
+        
         return deferred.promise;
       };
+      fn['breaker'] = circuitBreaker;
+      return fn;
     };
   };
 }

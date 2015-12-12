@@ -1,5 +1,5 @@
 /// <reference path="../src/lib/feign-cb.d.ts" />
-declare var Args: Args.ArgsStatic;
+declare var Args: any;
 declare var _: _.LoDashStatic;
 declare var CircuitBreaker: any;
 declare var feignjs: any;
